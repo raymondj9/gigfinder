@@ -16,7 +16,7 @@ interface JobCardProps {
 const JobCard: React.FC<JobCardProps> = ({
   title,
   budget,
-  timeStamp,
+//   timeStamp,
   description,
   status,
   url,
