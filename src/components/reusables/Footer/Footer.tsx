@@ -4,7 +4,7 @@ const Footer = () => {
 	return (	
 		<StyledFooter>
 			<div className="flex justify-center !mt-4 gap-x-8">
-				---
+				{/* --- */}
 			</div>
 		</StyledFooter>
 	);

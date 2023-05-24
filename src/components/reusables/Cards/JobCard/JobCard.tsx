@@ -1,52 +1,69 @@
 import styled from "styled-components";
-import { truncateText } from "../../../../utils/helperFunctions";
+import {
+  millisecondsToStr,
+  truncateText,
+} from "../../../../utils/helperFunctions";
+import { IGig } from "../../../../utils/types";
+import Tile from "../../Tile/Tile";
 
-interface JobCardProps {
-  title: string;
-  budget: {
-    minimum: number;
-    maximum: number;
-  };
-  timeStamp?: string;
-  description: string;
-  status: string;
-  url?: string;
-}
-
-const JobCard: React.FC<JobCardProps> = ({
-  title,
-  budget,
-//   timeStamp,
-  description,
-  status,
-  url,
-}) => {
+const JobCard = (props: any) => {
+  const {
+    title,
+    bid_stats,
+    budget,
+    currency,
+    preview_description,
+    status,
+    time_submitted,
+    seo_url,
+    type,
+  }: IGig = props.gig;
   return (
-    <StyledDiv className="block bg-white py-4 sm:pt-6 sm:pb-8 px-8 sm:px-16 border-b">
-      <h2>{title}</h2>
-      <h3 className="mb-3 text-text-base mt-3 sm:mt-5">{budget.minimum}</h3>
-      <div>
-        <p className="text-text-base">
-          {truncateText(description, 400)}&nbsp; &nbsp;
-          <a href={url} role="button" className="text-primary font-bold">
-            More...
+    <StyledDiv className="block pb-4 sm:pb-8">
+      <Tile>
+        <h2>
+          <a
+            href={`https://www.freelancer.com/projects/${seo_url}`}
+            className={`text-primary capitalize`}
+            target={"_blank"}
+          >
+            {title}
           </a>
+        </h2>
+        <p className="text-text-base">
+          {truncateText(preview_description, 600)}
         </p>
-      </div>
-      <div
-        className={`${
-          status === "active" ? "bg-primary" : "bg-green"
-        } w-max mt-6 flex flex-col items-center justify-center`}
-      >
-        <p className="capitalize text-white mb-0.5">{status}</p>
-      </div>
+        <small className="flex gap-4 mt-1">({type})</small>
+        <h3 className="mb-3 text-text-base mt-3 sm:mt-5">
+          {currency.sign}
+          {budget?.minimum}{" "}
+          {budget.maximum && "- " + currency.sign + budget?.maximum}
+        </h3>
+        <div className="md:flex flex-row-reverse justify-between">
+          <small className="flex gap-2 mt-1 my-2">
+            <span>
+              <strong>{millisecondsToStr(time_submitted / 1000)} ago</strong>
+            </span>
+            <span>
+              {bid_stats?.bid_count} bid{bid_stats?.bid_count > 1 && "s"}
+            </span>
+          </small>
+          <a
+            href={`https://www.freelancer.com/projects/${seo_url}`}
+            className={`bg-primary px-4 rounded-md inline-block`}
+            target={"_blank"}
+          >
+            <p className="capitalize text-white mb-0.5">Bid Now</p>
+          </a>
+        </div>
+      </Tile>
     </StyledDiv>
   );
 };
 
 const StyledDiv = styled.div`
   @media screen and (max-width: 340px) {
-    padding: 1rem 1.5rem;
+    /* padding: 1rem 1.5rem; */
   }
 
   & h2 {

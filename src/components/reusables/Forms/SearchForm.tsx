@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "../Atoms/Icon";
 import Button from "../Button/Button";
 import DefaultButton from "../Button/DefaultButton";
 
-const SearchForm = () => {
-  const [searchItem, setSearchItem] = useState("");
+type ISearchFormProps = {
+  handleSearch: (searchString: string) => void;
+};
+
+const SearchForm = ({ handleSearch }: ISearchFormProps) => {
+  const [searchItem, setSearchItem] = useState("react");
+  const onSearch = (searchString: string) => {
+    handleSearch(searchString);
+  };
+
+  useEffect(() => {
+    onSearch(searchItem);
+  }, [searchItem]);
+
   return (
     <FormWrap className="flex flex-col md:flex-row gap-4 px-6">
       <StyledForm className="block relative md:ml-6">
