@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
 import MainLayout from "../components/layouts/MainLayout";
 import SearchForm from "../components/reusables/Forms/SearchForm";
 import SearchResults from "../components/reusables/SearchResults/SearchResults";
