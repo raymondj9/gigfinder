@@ -13,7 +13,6 @@ const JobCard = (props: any) => {
     budget,
     currency,
     preview_description,
-    status,
     time_submitted,
     seo_url,
     type,
