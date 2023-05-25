@@ -77,7 +77,13 @@ export default function TextInput({
           {label}
         </label>
       )}
-      <div className={`relative w-full rounded-md ${input_style == 'flat' ? 'border-b' : 'bg-gray-200 border-gray-200 border-gray shadow-sm border border-solid'}`}>
+      <div
+        className={`relative w-full rounded-md ${
+          input_style == "flat"
+            ? "border-b"
+            : "bg-gray-200 border-gray-200 border-gray shadow-sm border border-solid"
+        }`}
+      >
         <input
           type={type}
           name={name}

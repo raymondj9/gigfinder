@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import Icon from "../Atoms/Icon";
 
 interface ILinks {
   title: string;
@@ -17,11 +18,13 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         <NavLink to={"/"}>GigFinder</NavLink>
         <div className="flex gap-x-6">
-          {navLinks.map((link) => (
+          {/* {navLinks.map((link) => (
             <NavLink to={link.url} className="p-2">
               {link.title}
             </NavLink>
-          ))}
+          ))} */}
+          <Icon icon="heart"/>
+          <Icon icon="search"/>
         </div>
       </div>
     </StyledNav>

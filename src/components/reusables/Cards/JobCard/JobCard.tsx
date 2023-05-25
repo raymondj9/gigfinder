@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {
   millisecondsToStr,
-  truncateText,
+  // truncateText,
 } from "../../../../utils/helperFunctions";
 import { IGig } from "../../../../utils/types";
 import Tile from "../../Tile/Tile";
@@ -18,7 +18,7 @@ const JobCard = (props: any) => {
     type,
   }: IGig = props.gig;
   return (
-    <StyledDiv className="block pb-4 sm:pb-8">
+    <StyledDiv className="block pb-4 sm:pb-4">
       <Tile>
         <h2>
           <a
@@ -29,10 +29,8 @@ const JobCard = (props: any) => {
             {title}
           </a>
         </h2>
-        <p className="text-text-base">
-          {truncateText(preview_description, 600)}
-        </p>
-        <small className="flex gap-4 mt-1">({type})</small>
+        <p className="text-text-base">{preview_description}... <span className="text-primary">More</span></p>
+        <small className="flex gap-4 mt-1">{type}</small>
         <h3 className="mb-3 text-text-base mt-3 sm:mt-5">
           {currency.sign}
           {budget?.minimum}{" "}

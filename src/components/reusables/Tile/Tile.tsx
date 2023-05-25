@@ -21,8 +21,7 @@ export const StyledTile = styled.div`
   background-color: #fff;
   box-sizing: border-box;
   border: 1px solid #ececec;
-  /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12); */
-  border-radius: 14px;
+  border-radius: 8px;
 `;
 
 export default Tile;

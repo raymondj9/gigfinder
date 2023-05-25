@@ -9,7 +9,7 @@ type ISearchFormProps = {
 };
 
 const SearchForm = ({ handleSearch }: ISearchFormProps) => {
-  const [searchItem, setSearchItem] = useState("react");
+  const [searchItem, setSearchItem] = useState("build website");
   const onSearch = (searchString: string) => {
     handleSearch(searchString);
   };
@@ -18,8 +18,12 @@ const SearchForm = ({ handleSearch }: ISearchFormProps) => {
     onSearch(searchItem);
   }, [searchItem]);
 
+  const handleSubmit = () => {
+    
+  };
+
   return (
-    <FormWrap className="flex flex-col md:flex-row gap-4 px-6">
+    <div className="flex flex-col md:flex-row gap-4 mx-6">
       <StyledForm className="block relative md:ml-6">
         <input
           type="search"
@@ -29,7 +33,7 @@ const SearchForm = ({ handleSearch }: ISearchFormProps) => {
           id="search"
           placeholder="E.g React developer"
         />
-        <DefaultButton>
+        <DefaultButton type="button" onClick={handleSubmit}>
           <Icon
             className="absolute top-[14px] left-5"
             icon="search"
@@ -38,13 +42,13 @@ const SearchForm = ({ handleSearch }: ISearchFormProps) => {
         </DefaultButton>
       </StyledForm>
       <div>
-        <Button className="!min-h-[45px]">Search</Button>
+        <Button className="!min-h-[45px]" onClick={handleSubmit}>
+          Search
+        </Button>
       </div>
-    </FormWrap>
+    </div>
   );
 };
-
-const FormWrap = styled.form``;
 
 const StyledForm = styled.form`
   & input {
@@ -66,7 +70,7 @@ const StyledForm = styled.form`
     }
 
     @media screen and (max-width: 1076px) {
-      width: 390px;
+      /* width: 390px; */
     }
   }
 `;

@@ -21,11 +21,13 @@ import JobCard from "../Cards/JobCard/JobCard";
 type ISearchResultsProps = {
   searchString: string;
   setTotalResult: (total: number) => void;
+  type: string;
 };
 
 const SearchResults = ({
   searchString,
   setTotalResult,
+  type,
 }: ISearchResultsProps) => {
   const [gigs, setGigs] = useState([]);
   const [total, setTotal] = useState(0);
@@ -36,10 +38,11 @@ const SearchResults = ({
   }, [total]);
 
   useEffect(() => {
+    // alert(type)
     setLoading(true);
     request
       .get(
-        `https://www.freelancer.com/api/projects/0.1/projects/active/?compact=&query=${searchString}&limit=20`
+        `https://www.freelancer.com/api/projects/0.1/projects/active/?compact=&query=${searchString}&limit=20&type=${type}`
       )
       .then((response) => {
         setLoading(false);
@@ -51,7 +54,7 @@ const SearchResults = ({
           console.log(err.response.data);
         }
       });
-  }, [searchString]);
+  }, [searchString,type]);
 
   return (
     <div>
@@ -59,8 +62,8 @@ const SearchResults = ({
         <div>Loading...</div>
       ) : (
         <div>
-          {gigs.map((gig: IGig) => (
-            <JobCard gig={gig} />
+          {gigs.map((gig: IGig, i) => (
+            <JobCard gig={gig} key={i} />
           ))}
         </div>
       )}
