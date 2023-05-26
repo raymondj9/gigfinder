@@ -20,7 +20,7 @@ const Filter = ({onTypeSelect} : FilterProps) => {
             selectOption={(e) => selectedOption(e)}
             id={"type"}
           >
-            <SelectInputDropdown.Option value={"all"}>
+            <SelectInputDropdown.Option value={""}>
               All
             </SelectInputDropdown.Option>
             <SelectInputDropdown.Option value={"hourly"}>

@@ -29,24 +29,46 @@ const SearchResults = ({
   setTotalResult,
   type,
 }: ISearchResultsProps) => {
-  const [gigs, setGigs] = useState([]);
+  const [gigs, setGigs] = useState<IGig[]>([]);
   const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   useEffect(() => {
     setTotalResult(total);
   }, [total]);
 
   useEffect(() => {
-    // alert(type)
-    setLoading(true);
+    if (type !== "" || searchString !== "") {
+      setLoading(true);
+      getData("reset");
+    }
+  }, [searchString, type]);
+
+  useEffect(() => {
+    if (page !== 0) {
+      setLoadingBtn(true);
+      getData("append");
+    }
+  }, [page]);
+
+  const getData = (quary_type: string) => {
+    if (loading || loadingBtn) {
+      return;
+    }
     request
       .get(
-        `https://www.freelancer.com/api/projects/0.1/projects/active/?compact=&query=${searchString}&limit=20&type=${type}`
+        `https://www.freelancer.com/api/projects/0.1/projects/active/?compact=&query=${searchString}&limit=20&project_types=[${type}]&offset=${page}`
       )
       .then((response) => {
         setLoading(false);
-        setGigs(response.data.result.projects);
+        setLoadingBtn(false);
+        if (quary_type == "append") {
+          setGigs([...gigs, ...response.data.result.projects]);
+        } else {
+          setGigs(response.data.result.projects);
+        }
         setTotal(response.data.result.total_count);
       })
       .catch((err) => {
@@ -54,7 +76,11 @@ const SearchResults = ({
           console.log(err.response.data);
         }
       });
-  }, [searchString,type]);
+  };
+
+  const next = () => {
+    setPage(page + 1);
+  };
 
   return (
     <div>
@@ -67,9 +93,11 @@ const SearchResults = ({
           ))}
         </div>
       )}
-      {total > 20 && loading == false && (
+      {total > 20 && loading == false && gigs.length < total && (
         <div className="mt-4">
-          <Button>Load More</Button>
+          <Button onClick={next} loading={loadingBtn}>
+            Load More
+          </Button>
         </div>
       )}
     </div>

@@ -5,7 +5,7 @@ interface SpinnerProps {
 	size?: number;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({ size, color = "#000" }) => {
+const Spinner: React.FC<SpinnerProps> = ({ size, color = "#fff" }) => {
 	return (
 		<Wrapper>
 			<svg
@@ -241,7 +241,6 @@ const Spinner: React.FC<SpinnerProps> = ({ size, color = "#000" }) => {
 
 const Wrapper = styled.div`
 	display: block;
-	background: #ccc;
 `;
 
 export default Spinner;

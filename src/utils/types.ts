@@ -16,4 +16,5 @@ export type IGig = {
   };
   type: string;
   seo_url: string;
+  full_description: string;
 };

@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import {
-  millisecondsToStr,
-  // truncateText,
-} from "../../../../utils/helperFunctions";
+import { millisecondsToStr } from "../../../../utils/helperFunctions";
 import { IGig } from "../../../../utils/types";
+import Icon from "../../Atoms/Icon";
 import Tile from "../../Tile/Tile";
 
 const JobCard = (props: any) => {
@@ -21,6 +19,7 @@ const JobCard = (props: any) => {
     <StyledDiv className="block pb-4 sm:pb-4">
       <Tile>
         <h2>
+          <Icon icon="bookmark" className="float-right mt-1 text-gray-400" />
           <a
             href={`https://www.freelancer.com/projects/${seo_url}`}
             className={`text-primary capitalize`}
@@ -29,20 +28,25 @@ const JobCard = (props: any) => {
             {title}
           </a>
         </h2>
-        <p className="text-text-base">{preview_description}... <span className="text-primary">More</span></p>
-        <small className="flex gap-4 mt-1">{type}</small>
+        <p className="text-text-base">
+          {preview_description}... <span className="text-primary">More</span>
+        </p>
+        <small className="flex gap-4 mt-1">({type})</small>
         <h3 className="mb-3 text-text-base mt-3 sm:mt-5">
           {currency.sign}
           {budget?.minimum}{" "}
           {budget.maximum && "- " + currency.sign + budget?.maximum}
         </h3>
         <div className="md:flex flex-row-reverse justify-between">
-          <small className="flex gap-2 mt-1 my-2">
+          <small className="flex gap-1 mt-1 my-2">
             <span>
               <strong>{millisecondsToStr(time_submitted / 1000)} ago</strong>
             </span>
+            <span>with</span>
             <span>
-              {bid_stats?.bid_count} bid{bid_stats?.bid_count > 1 && "s"}
+              <strong>
+                {bid_stats?.bid_count} bid{bid_stats?.bid_count > 1 && "s"}
+              </strong>
             </span>
           </small>
           <a

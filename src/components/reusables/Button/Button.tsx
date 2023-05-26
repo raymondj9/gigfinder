@@ -25,7 +25,7 @@ const Button = ({
 			type={type}
 			className={`${
 				variant == "outline" ? "border-primary b-2" : (variant !== "other") ? "bg-primary" : ""
-			} relative block w-full px-6 font-semibold text-white ${className}`}
+			} relative w-full px-6 font-semibold text-white flex justify-center items-center ${className}`}
 			{...props}
 		>
 			{loading ? <Spinner /> : children}
