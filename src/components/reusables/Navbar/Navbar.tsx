@@ -5,9 +5,9 @@ import Icon from "../Atoms/Icon";
 const Navbar = () => {
   return (
     <StyledNav
-      className={`bg-base py-3 max-w-6xl mx-auto px-4 fixed w-full z-50 border-b`}
+      className={`bg-base py-3 px-4 fixed w-full z-50 border-b`}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center max-w-6xl mx-auto">
         <NavLink to={"/"} className="font-bold">
           GigFinder
         </NavLink>
